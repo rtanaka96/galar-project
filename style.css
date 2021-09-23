@@ -1,0 +1,395 @@
+:root {
+}
+
+/* general styling */
+body, html {
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    font-family:'PT Sans', sans-serif;
+}
+
+body {
+    position: relative;
+}
+
+#container {
+    width:100%;
+    height: 100%;
+    background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(255,255,255,0.7));
+}
+
+select, option {
+    font-family:'PT Sans', sans-serif;
+}
+
+h1,h2,h3 {
+    margin:0;
+}
+
+/* main elements */
+header {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: center;
+    padding:1.5em 1em 0em 1em;
+    flex:1;
+    gap:0.5em;
+    /* background-image:url('img/banner.jpg'); */
+    background-size:cover;
+    background-position: center 70%;
+    /* box-shadow: #ccc 0px 0px 20px; */
+    /* backdrop-filter: blur(10px); */
+    /* background-image: linear-gradient(to top, rgba(255,255,255,0.5), rgba(255,255,255,1)); */
+}
+
+#title {
+    font-family: 'Philosopher', serif;
+    color:rgba(40,40,50,.8);
+    mix-blend-mode: multiply;
+    
+}
+
+#searchbar {
+    width:100%;
+    display:flex;
+    flex-flow:column wrap;
+    gap:0.25em;
+    padding:0.25em;
+    align-items: center;
+}
+
+#search {
+    box-sizing: border-box;
+    border-radius:1.5em;
+    border:1px solid rgba(0,0,0,0.2);
+    background:rgba(255,255,255,0);
+    color:rgba(0,0,0,0.5);
+    padding:1em;
+    width:70%;
+    font-size:0.9em;
+    font-family:'Hahmlet',serif !important;
+    transition: margin-left 300ms, width 300ms, background-color 300ms, color 300ms;
+}
+
+.wrap {
+    width:100%;
+    text-align: center;
+}
+
+#search:focus {
+    outline:none;
+    width:100%;
+    background:rgba(255,255,255,0.9);
+    color:rgba(0,0,0,0.9);
+    transition: margin-left 300ms, width 300ms, background-color 300ms, color 300ms;
+}
+
+#searchbar .hint {
+    font-size:0.5em;
+    margin-top:-2.5em;
+    position: absolute;
+    display: none;
+    color:#f08489;
+}
+
+#search::-webkit-input-placeholder, .fa-solid, .fa-regular {
+    font-family:'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+#filtermenu {
+    display:flex;
+    flex-flow:column wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding:1em 1em 0.5em 1em;
+    gap:0.5em;
+}
+
+form#filter {
+    width:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    gap:2em;
+}
+
+form#filter select {
+    width:100%;
+    padding:0.5em;
+    border-radius: 1em;
+    background:rgba(255,255,255,0);
+    border:1px solid rgba(0,0,0,0.2);
+    color:rgba(0,0,0,0.7);
+    transition: background-color 300ms, color 300ms;
+    font-size:0.7em;
+} 
+
+form#filter select:focus {
+    outline:none;
+    background:rgba(255,255,255,0.9);
+    color:rgba(0,0,0,0.9);
+    transition: background-color 300ms, color 300ms;
+
+}
+
+#dex {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: space-evenly;
+    padding:1em;
+    gap:1em;
+}
+
+#dex .card {
+    width:calc(100% / 2 - 3em);
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius: 0.5em;
+    display: flex;
+    flex-flow: column wrap;
+    gap:0.5em;
+    padding:1em;
+    background:rgba(255,255,255,0.4);
+}
+
+#dex .card h1, #dex .card h2, #dex .card p {
+    margin:0;
+}
+
+#dex .card img {
+    width:100%;
+    object-fit: cover;
+}
+
+#dex .card-header, #dex .types {
+    display:flex;
+    flex-flow:row nowrap;
+    width:100%;
+    align-items: center;
+}
+
+#dex .card-header {
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+
+#dex .card-header h1 {
+    font-size:1em;
+}
+
+#dex .card-header .dexnumber {
+    font-size:1em;
+    font-weight:lighter;
+}
+
+#dex .types {
+    justify-content: flex-start;
+    gap:0.5em;
+}
+
+#dex .types span {
+    text-align: center;
+    border-radius:1em;
+    border:1px solid rgba(0,0,0,0.2);
+    padding:0.25em 0.5em;
+    font-size:0.7em;
+    /* letter-spacing: 0.2em; */
+    color:rgba(0,0,0,0.7);
+}
+
+#dex .desc {
+    display:flex;
+    flex-flow:row wrap;
+    align-items: flex-start;
+    font-size: 0.8em;
+    gap:0.25em;
+}
+
+#dex .desc h2 {
+    font-size:0.9em;
+}
+
+/* modal */
+.overlay {
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height:100vh;
+    width:100%;
+    backdrop-filter: blur(10px) saturate(180%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    gap:1em;
+    z-index: 1;
+}
+
+.fa-window-close {
+    font-size:2em;
+    cursor: pointer;
+}
+
+.hidden {
+    opacity:0;
+    display:none;
+}
+
+.noscroll {
+    overflow-y: hidden;
+    margin:0;
+}
+
+.fa-xmark {
+    color:blue;
+}
+
+.modal {
+    display:flex;
+    flex-flow:column wrap;
+    align-items: center;
+    height:fit-content;
+    width:70%;
+    text-align: center;
+    background: rgba(255,255,255,0.8);
+    padding:1em 1.5em;
+    border-radius: 1.5em;
+    z-index:10;
+    gap:0.5em;
+    backdrop-filter: blur(10px) saturate(180%);
+    transition: all 300ms;
+}
+
+.modal h1 {
+    font-size:2.25em;
+    text-transform: capitalize;
+    font-family:'Philosopher';
+}
+
+.modal h2 {
+    font-weight:lighter;
+}
+
+.modal img {
+    width:50%;
+    position:absolute;
+    top:-5%;
+    right:-10%;
+}
+
+.modal-header {
+    width:100%;
+    text-align: left;
+    display:flex;
+    flex-flow:row nowrap;
+    align-items:center;
+}
+
+.modal-data {
+    margin-top:3.5em;
+    display:flex;
+    flex-flow:row nowrap;
+    gap:0.5em;
+    font-size:0.8em;
+}
+
+.modal .cell {
+    flex:1;
+    display:flex;
+    flex-flow:row wrap;
+    text-align: left;
+}
+
+.modal .label {
+    font-size:0.9em;
+    font-weight:bold;
+}
+
+.modal .data {
+    width:100%;
+    align-self: flex-end;
+}
+
+.modal-text {
+    text-align:left;
+    display: flex;
+    flex-flow:row wrap;
+    gap:0.5em;
+    padding-top:0.5em;
+    padding-bottom:1em;
+}
+
+.modal h2 {
+    font-size:1.2em;
+}
+
+.modal-text p {
+    font-size:0.8em;
+}
+
+/* type colors */
+.type.normal {
+    background:#A8A878;
+}
+
+.type.fire {
+    background:#F08030;
+}
+
+.type.water {
+    background:#6890F0;
+}
+
+.type.electric {
+    background:#F8D030;
+}
+
+.type.grass {
+    background:#78C850;
+}
+.type.ice {
+    background:#98D8D8;
+}
+.type.fighting {
+    background:#C03028;
+}
+.type.poison {
+    background:#A040A0;
+}
+.type.ground {
+    background:#E0C068;
+}
+.type.flying {
+    background:#A890F0;
+}
+.type.psychic {
+    background:#F85888;
+}
+.type.bug {
+    background:#A8B820;
+}
+.type.rock {
+    background:#B8A038;
+}
+.type.ghost {
+    background:#705898;
+}
+.type.dragon {
+    background:#7038F8;
+}
+.type.dark {
+    background:#705848;
+}
+.type.steel {
+    background:#B8B8D0;
+}
+.type.fairy {
+    background:#EE99AC;
+}
+
+span.dragon, span.fighting, span.dark, span.ghost, span.poison {
+    color:rgba(255,255,255,0.7) !important
+}

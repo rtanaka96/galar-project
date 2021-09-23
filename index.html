@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galar</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher&family=PT+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/07559190a3.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="overlay hidden">
+            <i class="fas fa-window-close"></i>
+            <div class="modal"></div>
+        </div>
+        <header>
+            <h1 id="title">Welcome to Galar.</h1>
+            <form id="searchbar">
+                <div class="wrap">
+                    <input type="text" id="search" placeholder="&#61442;">
+                    <span class="hint">default</span>
+                </div>
+            </form>
+        </header>
+        <main>
+            <div id="filtermenu">
+                <!-- <span>Filter by</span> -->
+                <form id="filter">
+                    <select name="type" id="type" class="filter">
+                        <option value="default">type</option>
+                    </select>
+                    <select name="color" id="pokemoncolor" class="filter">
+                        <option value="default">color</option>
+                    </select>
+                    <select name="ability" id="ability" class="filter">
+                        <option value="default">ability</option>
+                    </select>
+                </form>
+            </div>
+            <div id="dex">
+                <!-- <div class="card">
+                    <img src="https://cdn2.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png" alt="bulbasaur">
+                    <div class="card-header">
+                        <h1>Bulbasaur</h1>
+                        <span class="dexnumber">01</span>
+                    </div>
+                    <div class="types">
+                        <span class="type">grass</span>
+                        <span class="type">poison</span>
+                    </div>
+                    <div class="desc">
+                        <h2>Seed Pokemon</h2>
+                        <p>Tart cheesecake donut macaroon dessert soufflé caramels. Icing brownie jelly-o cupcake gummi bears sesame snaps bonbon candy canes. Chocolate bar biscuit gummies ice cream cookie marshmallow.</p>
+                    </div>
+                </div> -->
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

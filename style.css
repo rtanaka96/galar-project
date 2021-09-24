@@ -63,14 +63,14 @@ header {
 #search {
     box-sizing: border-box;
     border-radius:1.5em;
-    border:1px solid rgba(0,0,0,0.2);
+    border:1px solid rgba(0,0,0,0.1);
     background:rgba(255,255,255,0);
     color:rgba(0,0,0,0.5);
     padding:1em;
     width:70%;
     font-size:0.9em;
-    font-family:'Hahmlet',serif !important;
-    transition: margin-left 300ms, width 300ms, background-color 300ms, color 300ms;
+    font-family:'PT Sans',serif !important;
+    transition: all 300ms;
 }
 
 .wrap {
@@ -83,7 +83,8 @@ header {
     width:100%;
     background:rgba(255,255,255,0.9);
     color:rgba(0,0,0,0.9);
-    transition: margin-left 300ms, width 300ms, background-color 300ms, color 300ms;
+    border-color:rgba(255,255,255,0.8);
+    transition: all 300ms;
 }
 
 #searchbar .hint {
@@ -97,6 +98,7 @@ header {
 #search::-webkit-input-placeholder, .fa-solid, .fa-regular {
     font-family:'Font Awesome 5 Free';
     font-weight: 900;
+    color:rgba(0,0,0,0.3);
 }
 
 #filtermenu {
@@ -120,9 +122,9 @@ form#filter select {
     padding:0.5em;
     border-radius: 1em;
     background:rgba(255,255,255,0);
-    border:1px solid rgba(0,0,0,0.2);
+    border:1px solid rgba(0,0,0,0.1);
     color:rgba(0,0,0,0.7);
-    transition: background-color 300ms, color 300ms;
+    transition: all 300ms;
     font-size:0.7em;
 } 
 
@@ -130,8 +132,8 @@ form#filter select:focus {
     outline:none;
     background:rgba(255,255,255,0.9);
     color:rgba(0,0,0,0.9);
-    transition: background-color 300ms, color 300ms;
-
+    border-color:rgba(255,255,255,0.8);
+    transition: all 300ms;
 }
 
 #dex {
@@ -192,8 +194,8 @@ form#filter select:focus {
     text-align: center;
     border-radius:1em;
     border:1px solid rgba(0,0,0,0.2);
-    padding:0.25em 0.5em;
-    font-size:0.7em;
+    padding:0.25em .75em;
+    font-size:0.8em;
     /* letter-spacing: 0.2em; */
     color:rgba(0,0,0,0.7);
 }
@@ -218,19 +220,30 @@ form#filter select:focus {
     right: 0;
     bottom: 0;
     height:100vh;
-    width:100%;
+    width:100vw;
     backdrop-filter: blur(10px) saturate(180%);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column wrap;
-    gap:1em;
     z-index: 1;
+    flex-wrap:wrap;
+    justify-content: center;
+    /* align-content: center; */
+    padding:1em;
+    box-sizing: border-box;
+} 
+
+.close-button {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .fa-window-close {
     font-size:2em;
     cursor: pointer;
+    line-height:1em;
+    color:rgba(255,255,255,0.6);
 }
 
 .hidden {
@@ -243,12 +256,8 @@ form#filter select:focus {
     margin:0;
 }
 
-.fa-xmark {
-    color:blue;
-}
-
 .modal {
-    display:flex;
+    display:flex !important;
     flex-flow:column wrap;
     align-items: center;
     height:fit-content;
@@ -261,6 +270,8 @@ form#filter select:focus {
     gap:0.5em;
     backdrop-filter: blur(10px) saturate(180%);
     transition: all 300ms;
+    align-items: flex-start;
+
 }
 
 .modal h1 {
@@ -276,8 +287,9 @@ form#filter select:focus {
 .modal img {
     width:50%;
     position:absolute;
-    top:-5%;
+    top:-10%;
     right:-10%;
+    pointer-events: none;
 }
 
 .modal-header {
@@ -288,12 +300,17 @@ form#filter select:focus {
     align-items:center;
 }
 
+.modal-body {
+    width:100%;
+}
+
 .modal-data {
-    margin-top:3.5em;
+    margin-top:0.2em;
     display:flex;
     flex-flow:row nowrap;
     gap:0.5em;
     font-size:0.8em;
+    width:50%;
 }
 
 .modal .cell {
@@ -320,14 +337,15 @@ form#filter select:focus {
     gap:0.5em;
     padding-top:0.5em;
     padding-bottom:1em;
+    width:auto;
 }
 
 .modal h2 {
-    font-size:1.2em;
+    font-size:1em;
 }
 
 .modal-text p {
-    font-size:0.8em;
+    font-size:0.75em;
 }
 
 /* type colors */
@@ -392,4 +410,72 @@ form#filter select:focus {
 
 span.dragon, span.fighting, span.dark, span.ghost, span.poison {
     color:rgba(255,255,255,0.7) !important
+}
+
+/* media queries */
+
+/* tablets and screens over 600px */
+@media only screen and (min-width : 500px) {
+    /* modal styling */
+    .modal img {
+        width: 70%;
+        top: -20%;
+        right:-15%;
+    }
+}
+
+/* portrait tablet */
+@media only screen and (min-width : 768px) {
+    /* modal styling */
+    .modal img {
+        width:60%;
+        top:-15%;
+
+    }
+    .modal-data, .modal-text {
+        width:60%;
+    }
+    .modal .modal-title h1 {
+        font-size:4em;
+    }
+    .modal .modal-title h2 {
+        font-size:2em;
+    }
+
+    /* card styling */
+    #dex .card {
+        width:calc(100% / 4 - 3em);
+    }
+}
+
+/* landscape tablet  */
+@media only screen and (min-width: 1024px) {
+    /* modal styling */
+    .modal img {
+        width:60%;
+        top:-15%;
+
+    }
+    .modal-data, .modal-text {
+        width:65%;
+    }
+    .modal-chart {
+        width:60%;
+    }
+    .modal .modal-title h1 {
+        font-size:4em;
+    }
+    .modal .modal-title h2 {
+        font-size:2em;
+    }
+}
+
+/* laptop or bigger */
+@media only screen and (min-width: 1280px) {
+    /* .modal .modal-title h1 {
+        font-size:6em;
+    }
+    .modal .modal-title h2 {
+        font-size:2em;
+    } */
 }

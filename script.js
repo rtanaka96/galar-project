@@ -245,7 +245,6 @@ filters.forEach(filter => {
 //add event listener to search bar
 searchBar.addEventListener('keyup', function (e) {
     filterPokes(e);
-
 });
 //add event listener to filter categories
 for (let i = 0; i < filterSelects.length; i++) {
@@ -438,6 +437,7 @@ function displayModal(input) {
                     bottom: 0
                 }
             },
+            maintainAspectRatio: false,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -474,7 +474,9 @@ cardContainer.addEventListener('click', e => {
 });
 
 overlay.addEventListener('click', e => {
-    if (e.target !== modal || e.target.className === 'fas fa-window-close') {
+    //e.stopPropagation();
+    console.log(e.target);
+    if (!modal.contains(e.target) || e.target.className === 'fas fa-window-close') {
         hideModal();
     }
 });

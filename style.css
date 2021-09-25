@@ -412,28 +412,54 @@ span.dragon, span.fighting, span.dark, span.ghost, span.poison {
     color:rgba(255,255,255,0.7) !important
 }
 
-/* media queries */
-
-/* tablets and screens over 600px */
-@media only screen and (min-width : 500px) {
-    /* modal styling */
+/* media queries (used mostly bootstrap's breakpoints) */
+/* over 375px */
+@media (min-width: 375px) { 
+    .modal-data {
+        width:100%;
+    }
     .modal img {
-        width: 70%;
-        top: -20%;
-        right:-15%;
+        top:-15%;
+        right:-20%;
+        width: 55%;
+        max-width: 300px;
+        height: auto;
+    }
+}
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+    .modal img {
+        width: 60%;
+        max-width: 400px;
+    }
+    .modal-text, .modal-data {
+        width:80%;
+    }
+    .modal .modal-title h1 {
+        font-size:3em;
+    }
+    .modal .modal-title h2 {
+        font-size:1.5em;
+    }
+    .modal-body {
+        font-size:1em;
     }
 }
 
-/* portrait tablet */
-@media only screen and (min-width : 768px) {
-    /* modal styling */
-    .modal img {
-        width:60%;
-        top:-15%;
-
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .modal-text, .modal-data {
+        width:100%;
     }
-    .modal-data, .modal-text {
-        width:60%;
+    .modal-data {
+        width:70%;
+    }
+    .modal-text {
+        width:85%;
+    }
+    .modal img { 
+        width:70%;
+        max-width:450px;
     }
     .modal .modal-title h1 {
         font-size:4em;
@@ -441,41 +467,36 @@ span.dragon, span.fighting, span.dark, span.ghost, span.poison {
     .modal .modal-title h2 {
         font-size:2em;
     }
+}
 
-    /* card styling */
-    #dex .card {
-        width:calc(100% / 4 - 3em);
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .modal-data, .modal-text {
+        width:80%;
+    }
+    .modal-body {
+        font-size:1.5em;
     }
 }
 
-/* landscape tablet  */
-@media only screen and (min-width: 1024px) {
-    /* modal styling */
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
     .modal img {
-        width:60%;
-        top:-15%;
-
+        top:-25%;
+        width:80%;
+        max-width:500px;
     }
     .modal-data, .modal-text {
-        width:65%;
-    }
-    .modal-chart {
-        width:60%;
-    }
-    .modal .modal-title h1 {
-        font-size:4em;
-    }
-    .modal .modal-title h2 {
-        font-size:2em;
+        width:85%;
     }
 }
 
-/* laptop or bigger */
-@media only screen and (min-width: 1280px) {
-    /* .modal .modal-title h1 {
-        font-size:6em;
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    .modal-data, .modal-text {
+        width:95%;
     }
-    .modal .modal-title h2 {
-        font-size:2em;
-    } */
+    .modal img {
+        width:100%;
+    }
 }

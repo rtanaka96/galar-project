@@ -29,6 +29,19 @@ h1,h2,h3 {
 }
 
 /* main elements */
+#load-overlay {
+    z-index:100;
+    background:#fff;
+    opacity:1;
+    transition:opacity 500ms;
+}
+
+.loaded {
+    z-index:-100 !important;
+    opacity:0 !important;
+    transition:opacity 500ms;
+}
+
 header {
     display:flex;
     flex-flow:row wrap;

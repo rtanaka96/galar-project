@@ -1,4 +1,5 @@
 // api links //
+//testing link
 //const galarAPI = `galar.json`;
 //live link
 const galarAPI = `https://pokeapi.co/api/v2/generation/8/`;
@@ -6,7 +7,8 @@ const galarAPI = `https://pokeapi.co/api/v2/generation/8/`;
 // get necessary DOM elements //
 const cardContainer = document.querySelector('#dex');
 const card = document.querySelectorAll('.card');
-const overlay = document.querySelector('.overlay');
+const loadOverlay = document.querySelector('#load-overlay');
+const overlay = document.querySelector('#modal-overlay');
 let modal = document.querySelector('.modal');
 const searchBar = document.querySelector('#search');
 const filterMenu = document.querySelector('#filter');
@@ -19,36 +21,6 @@ const hint = document.querySelector('.hint');
 // //declare variables
 let pokemons = [];
 let pulledPokes = [];
-
-// set bg //
-// let bgs = [];
-// let bgSetting;
-// // for (let i = 1; i < 6; i++) {
-//     bgs.push('url("img/bg_scenery'+[i]+'.png")');
-// }
-
-// function getRandomBg(bgs) {
-//     let i = 1;
-//     do {
-//         bgs.push("url('img/bg_scenery" + [i] + ".png')");
-//         bgs.push("url('img/bg_pattern" + [i] + ".png')")
-//         i++;
-//     } while (i < 6);
-//     let ran = bgs[Math.floor(Math.random() * bgs.length)];
-//     if(ran.includes('scenery')) {
-//         bgSetting = 'no-repeat center center fixed';
-//         bgSize = 'cover';
-//     } else {
-//         bgSetting = 'repeat';
-//         bgSize = 'contain';
-//     }
-//     document.body.style.background = ran + ' ' + bgSetting;
-//     document.body.style.backgroundSize = bgSize;
-//     console.log(ran);
-
-// }
-
-// getRandomBg(bgs);
 
 //set random gradient bg
 let colors = [
@@ -165,6 +137,9 @@ async function extractMonData(mon) {
     let clone = { ...pokeData }
     storedPokeData.push(clone);
     renderCard(pokeData);
+    setTimeout(() => {
+        loadOverlay.classList.add('loaded');
+    }, 10);
     return storedPokeData;
 }
 
@@ -412,20 +387,41 @@ function displayModal(input) {
     let canvas = document.createElement('canvas');
     canvas.id = 'myChart';
     document.querySelector('.modal-chart').insertAdjacentElement('beforeend', canvas);
-
+    const labels = ['hp', 'atk', 'def', 'sp.atk', 'sp.def', 'speed'];
     let chart = new Chart(canvas, {
         type: 'bar',
         data: {
-            labels: ['hp', 'atk', 'def', 'sp.atk', 'sp.def', 'speed'],
+            labels: labels,
             datasets: [{
                 label: 'stats',
                 data: stats,
                 backgroundColor: barcolor,
-
                 borderWidth: 1
-            }]
+            }],
+            datalabels: {
+                align: 'end',
+                color: function(context) {
+                  return context.dataset.borderColor;
+                },
+                font: {
+                  size: 20,
+                  weight: 'bold'
+                },
+                formatter: function(value) {
+                  return value + ' GB';
+                }
+            }
         },
         options: {
+            plugins: {
+                datalabels: {
+                  anchor: 'center',
+                  offset: 0,
+                  font: {
+                    family: 'Philosopher, serif'
+                  }
+                }
+            },
             legend: {
                 display: false
             },
@@ -452,9 +448,8 @@ function displayModal(input) {
             }
         }
     });
-
     Chart.defaults.global.defaultFontFamily = 'Philosopher, serif';
-
+    //Chart.register(ChartDataLabels);
 }
 
 function hideModal() {
@@ -474,8 +469,6 @@ cardContainer.addEventListener('click', e => {
 });
 
 overlay.addEventListener('click', e => {
-    //e.stopPropagation();
-    console.log(e.target);
     if (!modal.contains(e.target) || e.target.className === 'fas fa-window-close') {
         hideModal();
     }

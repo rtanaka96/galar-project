@@ -419,16 +419,17 @@ span.dragon, span.fighting, span.dark, span.ghost, span.poison {
         width:100%;
     }
     .modal img {
-        top:-15%;
-        right:-20%;
+        top:-20%;
+        right:-15%;
         width: 55%;
-        max-width: 300px;
+        max-width: 170px;
         height: auto;
     }
 }
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) { 
     .modal img {
+        right:-25%;
         width: 60%;
         max-width: 400px;
     }
@@ -449,17 +450,13 @@ span.dragon, span.fighting, span.dark, span.ghost, span.poison {
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .modal-text, .modal-data {
-        width:100%;
-    }
-    .modal-data {
         width:70%;
     }
-    .modal-text {
-        width:85%;
-    }
     .modal img { 
-        width:30%;
-        max-width:450px;
+        top:-17%;
+        right:-17%;
+        width:65%;
+        max-width:350px;
     }
     .modal .modal-title h1 {
         font-size:4em;
@@ -473,26 +470,19 @@ span.dragon, span.fighting, span.dark, span.ghost, span.poison {
     }
 }
 
-/* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+/* // Large devices (desktops, 900px and up) */
+@media (min-width: 900px) {
     .modal-data, .modal-text {
         width:80%;
-    }
-    .modal-body {
-        font-size:1.5em;
     }
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .modal img {
-        top:-25%;
-        width:50%;
-        right:-20%;
-        max-width:500px;
-    }
-    .modal-data, .modal-text {
-        width:80%;
+        top:-17%;
+        width:75%;
+        right:-10%;
     }
 }
 

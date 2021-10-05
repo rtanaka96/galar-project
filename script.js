@@ -42,134 +42,109 @@ let colors = [
 ];
 let random = colors[Math.floor(Math.random() * colors.length)];
 let bg = `linear-gradient(to right, ${random})`;
-document.body.style.backgroundImage = bg;
+document.body.style.background = bg;
 
 // fetch data from pokemon api // 
 fetch(galarAPI)
     .then(res => res.json())
-    .then(allpokemon => pullPokemon(allpokemon))
+    .then(data => pullPokemon(data.pokemon_species))
     .catch(err => console.log(err));
 
 // store data // 
-let pokeData = {
-    'name': '',
-    'number': '',
-    'color': '',
-    'flavortext': '',
-    'genera': '',
-    'sprite': '',
-    'art': '',
-    'types': '',
-    'abilities': [],
-    'height': '',
-    'weight': '',
-    'baseexp': '',
-    'stats': [],
-    'growth': '',
-    'shape': ''
-}
-let storedPokeData = [];
+const storedPokeData = [];
 
-// pull data from fetched data // 
-async function extractMonData(mon) {
-    //grab name and dex number
-    let number = (mon.url).slice(-5);
-    //console.log(mon);
-    //get api urls to fetch data from
-    basicURL = mon.url;
-    detailedURL = `https://pokeapi.co/api/v2/pokemon${number}`;
+// pull pokemon data from api // 
+let pullPokemon = (data) => {
+    data.forEach(async poke => {
+        const pokeData = {
+            'name': '',
+            'number': '',
+            'color': '',
+            'flavortext': '',
+            'genera': '',
+            'sprite': '',
+            'art': '',
+            'types': '',
+            'abilities': [],
+            'height': '',
+            'weight': '',
+            'baseexp': '',
+            'stats': [],
+            'growth': '',
+            'shape': ''
+        }
+        pokeData.name = poke.name;
+        pokeData.number = poke.url.slice(-6).replace(/\D/g, '');
+        storedPokeData.push(pokeData);
+        const basicURL = poke.url;
+        const detailedURL = `https://pokeapi.co/api/v2/pokemon/${pokeData.number}/`;
 
-    await Promise.all([
-        fetch(basicURL)
-            .then(response => response.json())
-            .then(data => {
-                //pull data for easier access
-                pokeData.name = data.name;
-                pokeData.number = data.pokedex_numbers[0].entry_number;
-                pokeData.color = data.color.name;
-                pokeData.shape = data.shape.name;
-                pokeData.growth = data.growth_rate.name;
+        await Promise.all([
+            fetch(basicURL)
+                .then(response => response.json())
+                .then(data => {
+                    //pull data for easier access
+                    pokeData.name = data.name;
+                    pokeData.number = data.pokedex_numbers[0].entry_number;
+                    pokeData.color = data.color.name;
+                    pokeData.shape = data.shape.name;
+                    pokeData.growth = data.growth_rate.name;
 
-                //grab english only genus name
-                data.genera.forEach(item => {
-                    if (item.language.name == 'en') {
-                        pokeData.genera = item.genus;
-                    }
-                });
+                    //grab english only genus name
+                    data.genera.forEach(item => {
+                        if (item.language.name == 'en') {
+                            pokeData.genera = item.genus;
+                        }
+                    });
 
-                //grab english only flavor text
-                data.flavor_text_entries.forEach(item => {
-                    if (item.language.name == 'en') {
-                        pokeData.flavortext = item.flavor_text;
-                    }
-                });
-            }),
-        fetch(detailedURL)
-            .then(response => response.json())
-            .then(data => {
-                //pull data for easier access
-                pokeData.sprite = data.sprites.front_default;
-                pokeData.art = data.sprites.other["official-artwork"].front_default;
-                let statArray = [];
-                data.stats.forEach(function (stats) {
-                    statArray.push(stats);
-                });
-                pokeData.stats = statArray;
-                //grab all types
-                let typeArray = [];
-                data.types.forEach(function (type, index) {
-                    typeArray.push(type.type.name);
-                });
-                pokeData.types = typeArray;
-                // grab all abilities
-                let abilityArray = [];
-                data.abilities.forEach(ability => {
-                    abilityArray.push(ability.ability);
-                });
-                pokeData.abilities = abilityArray;
-                //grab misc data
-                pokeData.height = data.height / 10 + 'm';
-                pokeData.weight = data.weight / 10 + 'kg';
-                pokeData.baseexp = data.base_experience;
-            })
-
-    ]);
-    let clone = { ...pokeData }
-    storedPokeData.push(clone);
-    renderCard(pokeData);
-    setTimeout(() => {
-        loadOverlay.classList.add('loaded');
-    }, 10);
+                    //grab english only flavor text
+                    data.flavor_text_entries.forEach(item => {
+                        if (item.language.name == 'en') {
+                            pokeData.flavortext = item.flavor_text;
+                        }
+                    });
+                }),
+            fetch(detailedURL)
+                .then(response => response.json())
+                .then(data => {
+                    //pull data for easier access
+                    pokeData.sprite = data.sprites.front_default;
+                    pokeData.art = data.sprites.other["official-artwork"].front_default;
+                    let statArray = [];
+                    data.stats.forEach(function (stats) {
+                        statArray.push(stats);
+                    });
+                    pokeData.stats = statArray;
+                    //grab all types
+                    let typeArray = [];
+                    data.types.forEach(function (type, index) {
+                        typeArray.push(type.type.name);
+                    });
+                    pokeData.types = typeArray;
+                    // grab all abilities
+                    let abilityArray = [];
+                    data.abilities.forEach(ability => {
+                        abilityArray.push(ability.ability);
+                    });
+                    pokeData.abilities = abilityArray;
+                    //grab misc data
+                    pokeData.height = data.height / 10 + 'm';
+                    pokeData.weight = data.weight / 10 + 'kg';
+                    pokeData.baseexp = data.base_experience;
+                })
+        ]);
+        renderCard(pokeData);
+    });
+    loadOverlay.classList.add('loaded');
     return storedPokeData;
 }
 
-//select data to fetch
-function pullPokemon(mon) {
-    pokemons = mon.pokemon_species;
-    pulledPokes = mon.pokemon_species;
-    mon = mon.pokemon_species;
 
-    mon.forEach((mon) => {
-        extractMonData(mon);
-    });
-}
-
-//store pokemon data
-
-//check that pokemon data is stored
-let isStored = (storedPokeData.length === pulledPokes.length);
-
-// create cards // 
+// render card using pulled data // 
 function renderCard(data) {
+    //console.log(data);
     let typeContainer = document.createElement('div');
     typeContainer.className = 'types';
-
-    //console.log(data);
-
-    data.types.forEach(type => {
-        let typeElem = `<span class="type ${type}">${type}</span>`;
-        typeContainer.insertAdjacentHTML('beforeend', typeElem);
-    });
 
     let card = document.createElement('div');
     card.className = 'card';
@@ -216,7 +191,8 @@ filters.forEach(filter => {
             let list = pullList(item);
             list.forEach(item => fillList(item, filter));
         });
-})
+});
+
 //add event listener to search bar
 searchBar.addEventListener('keyup', function (e) {
     filterPokes(e);
@@ -473,3 +449,9 @@ overlay.addEventListener('click', e => {
         hideModal();
     }
 });
+
+document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && modal.style.display === 'block' ) {
+        hideModal();
+    }
+})
